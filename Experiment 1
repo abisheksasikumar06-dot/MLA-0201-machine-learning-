@@ -1,0 +1,120 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNP8ECaC5LHwQ8yEdkgc6KM",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/abisheksasikumar06-dot/MLA-0201-machine-learning-/blob/main/Experiment%201\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 106
+        },
+        "id": "8NX65f7OldmS",
+        "outputId": "ff9e6ad6-1be1-41a2-ebe1-4ecf6502a027"
+      },
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "IndentationError",
+          "evalue": "unexpected indent (3133673242.py, line 22)",
+          "traceback": [
+            "\u001b[0;36m  File \u001b[0;32m\"/tmp/ipykernel_2188/3133673242.py\"\u001b[0;36m, line \u001b[0;32m22\u001b[0m\n\u001b[0;31m    df = pd.DataFrame(data)\u001b[0m\n\u001b[0m    ^\u001b[0m\n\u001b[0;31mIndentationError\u001b[0m\u001b[0;31m:\u001b[0m unexpected indent\n"
+          ]
+        }
+      ],
+      "source": [
+        "# FIND-S Algorithm\n",
+        "# Machine Learning Lab\n",
+        "# Works directly in Google Colab\n",
+        "\n",
+        "import pandas as pd\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "# ---------------------------------------------------\n",
+        "# STEP 1: Create the training dataset\n",
+        "# ---------------------------------------------------\n",
+        "\n",
+        "data = {\n",
+        "    'Sky':    ['Sunny', 'Sunny', 'Rainy', 'Sunny', 'Sunny'],\n",
+        "        'AirTemp':['Warm',  'Warm',  'Cold',  'Warm',  'Warm'],\n",
+        "            'Humidity':['Normal', 'High', 'High', 'High', 'Normal'],\n",
+        "                'Wind':   ['Strong', 'Strong', 'Strong', 'Weak', 'Weak'],\n",
+        "                    'Water':  ['Warm', 'Warm', 'Warm', 'Cool', 'Warm'],\n",
+        "                        'Forecast':['Same', 'Same', 'Change', 'Change', 'Change'],\n",
+        "                            'EnjoySport':['Yes', 'Yes', 'No', 'Yes', 'Yes']\n",
+        "                            }\n",
+        "\n",
+        "                            df = pd.DataFrame(data)\n",
+        "\n",
+        "                            print(\"Training Dataset:\")\n",
+        "                            display(df)\n",
+        "\n",
+        "                            # ---------------------------------------------------\n",
+        "                            # STEP 2: FIND-S Algorithm\n",
+        "                            # ---------------------------------------------------\n",
+        "\n",
+        "                            def find_s(data):\n",
+        "                                attributes = data.columns[:-1]\n",
+        "                                    target = data.columns[-1]\n",
+        "\n",
+        "                                        # Initialize hypothesis with the most specific values\n",
+        "                                            hypothesis = ['Ø'] * len(attributes)\n",
+        "\n",
+        "                                                print(\"\\nFIND-S Algorithm Steps:\")\n",
+        "                                                    print(\"Initial Hypothesis:\", hypothesis)\n",
+        "\n",
+        "                                                        # Process each training example\n",
+        "                                                            for index, row in data.iterrows():\n",
+        "\n",
+        "                                                                    # Consider only positive examples\n",
+        "                                                                            if row[target] == 'Yes':\n",
+        "\n",
+        "                                                                                        for i, attribute in enumerate(attributes):\n",
+        "\n",
+        "                                                                                                        # If hypothesis is still most specific\n",
+        "                                                                                                                        if hypothesis[i] == 'Ø':\n",
+        "                                                                                                                                            hypothesis[i] = row[attribute]\n",
+        "\n",
+        "                                                                                                                                                            # If values are different, generalize\n",
+        "                                                                                                                                                                            elif hypothesis[i] != row[attribute]:\n",
+        "                                                                                                                                                                                                hypothesis[i] = '?'\n",
+        "\n",
+        "                                                                                                                                                                                                            print(f\"After positive example {index + 1}: {hypothesis}\")\n",
+        "\n",
+        "                                                                                                                                                                                                                return hypothesis\n",
+        "\n",
+        "\n",
+        "                                                                                                                                                                                                                # Find the most specific hypothesis\n",
+        "                                                                                                                                                                                                                final_hypothesis = find_s(df)\n",
+        "\n",
+        "                                                                                                                                                                                                                print(\"\\nFinal Most Specific Hypothesis:\")\n",
+        "                                                                                                                                                                                                                print(final_hypothesis)"
+      ]
+    }
+  ]
+}
